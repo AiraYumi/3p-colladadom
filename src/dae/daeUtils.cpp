@@ -174,7 +174,9 @@ string cdom::getRandomFileName() {
     std::string tmpbuffer; tmpbuffer.resize(L_tmpnam*2+1);
     std::string tmp(tmpnam(&tmpbuffer[0]));
 #else
-	std::string tmp(boost::lexical_cast<std::string>(random_generator()()));
+    //std::string tmp(boost::lexical_cast<std::string>(random_generator()()));
+    std::string tmpbuffer; tmpbuffer.resize(L_tmpnam*2+1);
+    std::string tmp(tmpnam_s(&tmpbuffer[0], L_tmpnam*2+1));
 #endif
 #ifdef WIN32
     randomSegment = tmp.substr(tmp.find_last_of('\\')+1);
