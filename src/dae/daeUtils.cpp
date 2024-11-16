@@ -21,6 +21,7 @@
 #include <boost/filesystem.hpp> // THIS WAS NOT COMMENTED.
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <boost/lexical_cast.hpp>
 #endif
 
 #include <stdio.h> // for tmpnam
@@ -176,7 +177,7 @@ string cdom::getRandomFileName() {
     std::string tmp(tmpnam(&tmpbuffer[0]));
 #else
     boost::uuids::uuid uuid = boost::uuids::random_generator()();
-    std::string tmp = boost::uuids::to_string(uuid);
+    std::string tmp = boost::lexical_cast<std::string>(uuid);
 #endif
 #ifdef WIN32
     randomSegment = tmp.substr(tmp.find_last_of('\\')+1);
